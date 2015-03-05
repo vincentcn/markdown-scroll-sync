@@ -1,23 +1,23 @@
-{Subscriber} = require 'emissary'
+###
+  lib/main.coffee
+###
 
-StatusBarView = require './status-bar-view'
-dmpmod        = require 'diff_match_patch'
-dmp           = new dmpmod.diff_match_patch()
+SubAtom = null
 
-DIFF_EQUAL  =  0
-DIFF_INSERT =  1
-DIFF_DELETE = -1
-
-paneInfo = [null, null]
-
-class ScrlSync
-  Subscriber.includeInto @
+class MarkdownScrlSync
   
   activate: (state) ->
-    @statusBarView = null
-    atom.workspaceView.command "markdown-scroll-sync:toggle", => 
-      if not @statusBarView then @startTracking()
-      else                       @stopTracking()
+    console.log 'activate'
+    SubAtom = require 'sub-atom'
+    @subs = new SubAtom
+    @subs.add atom.commands.add 'atom-text-editor', "markdown-scroll-sync:toggle", (e) => @toggle()
+
+  toggle: -> console.log 'toggle'
+    
+  consumeStatusBar: (statusBar) ->
+    @notificationEle = document.createElement 'div'
+    @notificationEle.appendChild document.createTextNode 'mdSync'
+    @statusBarTile = statusBar.addLeftTile item: @notificationEle, priority: 100
 
   startTracking: -> 
     paneView   = atom.workspaceView.getActivePaneView()
@@ -112,15 +112,13 @@ class ScrlSync
       otherInfo.scrolling = no
 
   stopTracking: ->
-    @unsubscribe()
-    paneInfo = [null, null]
-    @statusBarView?.destroy()
-    @statusBarView = null
   
   deactivate: -> 
-    @stopTracking
+    @subs.dispose()
+    @statusBarTile?.destroy()
+    @statusBarTile = null  
 
-module.exports = new ScrlSync
+module.exports = new MarkdownScrlSync
 
 
 

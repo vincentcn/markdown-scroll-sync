@@ -1,13 +1,12 @@
 # markdown-scroll-sync Atom editor package
 
-Synchronize scrolling of two editor panes by content. 
+Auto-scroll markdown-preview tab to match markdown source
+
 --
 
 See project at [github](https://github.com/mark-hahn/markdown-scroll-sync).
 
-![Animated GIF](https://github.com/mark-hahn/markdown-scroll-sync/blob/master/scroll.gif?raw=true)
 
-(If the image above is not animated then click on it).
 
 # Usage:
 - Open two files in separate panes so they are both visible.

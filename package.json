@@ -1,14 +1,22 @@
 {
   "name": "markdown-scroll-sync",
-  "main": "./lib/markdown-scroll-sync",
+  "main": "./lib/main",
   "version": "0.1.0",
-  "description": "Synchronize scrolling of two editor panes by content.",
+  "description": "Auto-scroll markdown-preview tab to match markdown source",
   "activationEvents": ["markdown-scroll-sync:toggle"],
   "repository": "https://github.com/mark-hahn/markdown-scroll-sync",
   "license": "MIT",
   "engines": {
     "atom": ">0.180.0"
   },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^0.57.0": "consumeStatusBar"
+      }
+    }
+  },
   "dependencies": {
+    "sub-atom": "*"
   }
 }
