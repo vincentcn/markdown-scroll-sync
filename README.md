@@ -1,21 +1,25 @@
 # markdown-scroll-sync Atom editor package
 
-Auto-scroll markdown-preview tab to match markdown source
+Auto-scroll markdown-preview tab to match markdown source.  See the project at [github](https://github.com/mark-hahn/markdown-scroll-sync).
 
---
+---
 
-See project at [github](https://github.com/mark-hahn/markdown-scroll-sync).
+![Image inserted by Atom editor package auto-host-markdown-image](http://i.imgur.com/X3fVXdL.gif)
 
+---
 
+### Usage:
 
-# Usage:
-- Open two files in separate panes so they are both visible.
-- Press `ctrl-alt-S` (`markdown-scroll-sync:toggle`) and the word `SrclSync` will appear in the status bar to indicate that scrolling is synced.
-- Scroll either editor pane and the other editor pane will scroll to match.
-- When sections of the files don't match, the editor pane you are directly controlling will scroll through the entire file as normal.  The other pane will stop or jump ahead as needed to keep the content aligned.
-- You may switch between the files to change which is the "master" and which is the "slave".
-- To stop syncing, click on `SrclSync` in the status bar or close one of the tabs.
+There is no atom command or keybinding. There are no config settings.
 
-#License
+The package starts on load and watches for when it should sync.  It will automatically sync when there are two panes where one active tab is a markdown file and another active tab is the markdown preview for that file.  At that point it will scroll the preview to match the markdown file's scroll position.  
+
+When the markdown file is scrolled the preview is automatically scrolled to match.  If the preview is scrolled then syncing is temporarily turned off until the main file is focused again.  The markdown file is never automatically scrolled to match the preview.
+
+### License
 
 Copyright Mark Hahn by MIT license.
+
+### Advertisement.  
+
+See other packages by mark-hahn at https://atom.io/users/mark-hahn/packages?direction=desc&sort=downloads.

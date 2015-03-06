@@ -3,20 +3,14 @@
   "main": "./lib/main",
   "version": "0.1.0",
   "description": "Auto-scroll markdown-preview tab to match markdown source",
-  "activationEvents": ["markdown-scroll-sync:toggle"],
   "repository": "https://github.com/mark-hahn/markdown-scroll-sync",
   "license": "MIT",
   "engines": {
     "atom": ">0.180.0"
   },
-  "consumedServices": {
-    "status-bar": {
-      "versions": {
-        "^0.57.0": "consumeStatusBar"
-      }
-    }
-  },
   "dependencies": {
-    "sub-atom": "*"
+    "space-pen": "*",
+    "sub-atom":  "*",
+    "roaster": "^1.1.2"
   }
 }

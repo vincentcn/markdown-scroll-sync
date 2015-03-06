@@ -1,2 +1,4 @@
 
-### 0.1.0 - First Release
+### 0.1.0 - 3/5/15
+
+* First Release
