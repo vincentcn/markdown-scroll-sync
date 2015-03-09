@@ -1,4 +1,5 @@
 
-### 0.1.0 - 3/5/15
+### 0.1.1 - 3/8/15
+* Fixed starting scroll with wrong setup
 
-* First Release
+### 0.1.0 - 3/5/15

@@ -36,7 +36,8 @@ class MarkdownScrlSync
   
   startTracking: (editor, preview) ->
     editorView = atom.views.getView editor
-    $lines = $ editorView.shadowRoot.querySelector '.lines'
+    if not (shadow = editorView.shadowRoot) then return
+    $lines = $ shadow.querySelector '.lines'
     
     lastTopRow = null
     @scrollInterval = setInterval =>
