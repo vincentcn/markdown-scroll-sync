@@ -1,4 +1,7 @@
 
+### 0.1.2 - 3/9/15
+* Ignore exception being thrown in editor::bufferPositionForScreenPosition
+
 ### 0.1.1 - 3/8/15
 * Fixed starting scroll with wrong setup
 

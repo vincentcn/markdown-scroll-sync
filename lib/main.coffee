@@ -48,8 +48,13 @@ class MarkdownScrlSync
       if topRow isnt lastTopRow
         lastTopRow = topRow
         # console.log 'topRow', topRow
-        bufPos = editor.bufferPositionForScreenPosition [topRow+1, 0]
-        @scroll preview, editor.getTextInBufferRange [[0,0],bufPos]
+        try
+          bufPos = editor.bufferPositionForScreenPosition [topRow+1, 0]
+        catch e
+          console.log 'markdown-scroll-sync: error in bufferPositionForScreenPosition', 
+            {editor, topRow, e}
+          return
+        @scroll preview, editor.getTextInBufferRange [[0,0], bufPos]
     , 300
       
   scroll: (preview, text) ->
