@@ -19,7 +19,7 @@ class MarkdownScrlSync
 
       
       if not (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview')
-        # console.log 'markdown-scroll-sync: markdown-preview package not found'
+        console.log 'markdown-scroll-sync: markdown-preview package not found'
         return
       viewPath = pathUtil.join prvwPkg.path, 'lib/markdown-preview-view'
       MarkdownPreviewView  = require viewPath
@@ -45,6 +45,7 @@ class MarkdownScrlSync
       $lines.find('.line').each (idx, ele) =>
         row = $(ele).attr 'data-screen-row'
         topRow = Math.min topRow, row
+      topRow += 1
       if topRow isnt lastTopRow
         lastTopRow = topRow
         # console.log 'topRow', topRow
@@ -54,15 +55,41 @@ class MarkdownScrlSync
           console.log 'markdown-scroll-sync: error in bufferPositionForScreenPosition', 
             {editor, topRow, e}
           return
-        @scroll preview, editor.getTextInBufferRange [[0,0], bufPos]
+        mdBeforeTopLine = editor.getTextInBufferRange [[0,0], bufPos]
+        @scroll preview, mdBeforeTopLine
+        
+        fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\mdBeforeTopLine.md', mdBeforeTopLine
     , 300
+
+  walkDOM: (node) ->
+    node = node.firstChild
+    while node
+      # console.log 'nodeName', node.nodeName, node.nodeType
+      # if node.nodeType is 3 then console.log node.data
+      if node.nodeType in [1,8] 
+        @resultNode = node
+        --@numEles
+      if @numEles <= 0 then return
+      if node.nodeName.toLowerCase().indexOf('atom-') < 0 then @walkDOM node
+      # else debugger
+      if @numEles <= 0 then return
+      node = node.nextSibling
       
   scroll: (preview, text) ->
     @roaster text, {}, (err, html) =>
-      numEles = html.match(/<h1|<h2|<h3|<div|<p|<img|<ul|<li/gi)?.length ? 0
-      $ele = $(preview).find('h1,h2,h3,div,p,img,ul,li').eq numEles-1
-      # console.log 'getSelector', {err, html, numEles, $ele}
-      $ele[0]?.scrollIntoView()
+      fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\htmlBeforeTopLine.html', html
+      
+      @numEles = 0
+      regex = new RegExp '<([^\\/][a-z]*).*?>', 'g'
+      while (match = regex.exec html)
+        if match[1].toLowerCase() isnt 'code'
+          @numEles++
+      
+      # console.log 'before walkDOM', @numEles
+      @resultNode = preview[0]
+      @walkDOM @resultNode
+      @resultNode.scrollIntoView()
+      # console.log 'walkDOM done', @resultNode
 
   stopTracking: ->
     if @scrollInterval 
