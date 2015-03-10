@@ -1,4 +1,7 @@
 
+### 0.2.0 - 3/10/15
+* improved accuracy by walking the DOM
+
 ### 0.1.2 - 3/9/15
 * Ignore exception being thrown in editor::bufferPositionForScreenPosition
 
