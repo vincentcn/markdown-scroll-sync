@@ -1,798 +1,90 @@
-:man source:   Bspwm
-:man version:  {revnumber}
-:man manual:   Bspwm Manual
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+L-1
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
+L
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+``` javascript
+var foo = function() {
+    bar1();
+    bar2();
+    bar3();
+}
+```
 
-bspwm(1)
-========
-
-Name
-----
-
-bspwm - Binary space partitioning window manager
-
-Synopsis
---------
-
-*bspwm* [*-h*|*-v*|*-c* 'CONFIG_PATH']
-
-*bspc* 'COMMAND' ['ARGUMENTS']
-
-Description
------------
-
-*bspwm* is a tiling window manager that represents windows as the leaves of a full binary tree.
-
-It is controlled and configured via *bspc*.
-
-
-Options
--------
-
-*-h*::
-	Print the synopsis and exit.
-
-*-v*::
-	Print the version and exit.
-
-*-c* 'CONFIG_PATH'::
-	Use the given configuration file.
-
-Configuration
--------------
-
-*bspwm* has only two sources of informations: the X events it receives and the messages it reads on a dedicated socket.
-
-The default configuration file is '$XDG_CONFIG_HOME/bspwm/bspwmrc'.
-
-Keyboard and pointer bindings are defined with https://github.com/baskerville/sxhkd[sxhkd].
-
-Example configuration files can be found in the *examples* directory.
-
-Splitting Modes
----------------
-
-New windows are inserted in the tree as close as possible to the focused window.
-
-There are only two splitting modes: 'automatic' and 'manual'.
-
-The default mode is 'automatic'. The 'manual' mode is entered by sending a *preselection* message.
-
-Example: insertion of a new node (number 4) into the given tree in 'automatic' mode:
-
-----
-              b                                   c
-             / \                                 / \
-            3   a              -->              4   b
-            ^  / \                              ^  / \
-              2   1                               3   a
-                                                     / \
-                                                    2   1
- +-------------------------+         +-------------------------+
- |            |            |         |            |            |
- |            |     2      |         |            |     3      |
- |            |            |         |            |            |
- |     3      |------------|   -->   |     4      |------------|
- |     ^      |            |         |     ^      |     |      |
- |            |     1      |         |            |  1  |  2   |
- |            |            |         |            |     |      |
- +-------------------------+         +-------------------------+
-----
-
-Same action, but the mode is 'manual', and a *window --presel up* message was sent beforehand:
-
-----
-             b                                   b
-            / \                                 / \
-           3   a              -->              c   a
-           ^  / \                             / \ / \
-             2   1                           4  3 2  1
-                                             ^
-+-------------------------+         +-------------------------+
-|            |            |         |            |            |
-|            |     2      |         |     4      |     2      |
-|            |            |         |     ^      |            |
-|     3      |------------|   -->   |------------|------------|
-|     ^      |            |         |            |            |
-|            |     1      |         |     3      |     1      |
-|            |            |         |            |            |
-+-------------------------+         +-------------------------+
-----
-
-Containers
-----------
-
-Each monitor contains at least one desktop.
-
-Each desktop contains at most one tree.
-
-Common Definitions
-------------------
-
-----
-DIR         := left | right | up | down
-CYCLE_DIR   := next | prev
-----
-
-Selectors
----------
-
-Selectors are used to select a target window, desktop, or monitor. A selector
-can either describe the target relatively or name it globally.
-
-Descriptive (relative) selectors consist of a primary selector and any number
-of non-conflicting modifiers as follows:
-
-	PRIMARY_SELECTOR[.MODIFIER]*
-
-For obvious reasons, neither desktop nor monitor names may be valid descriptive
-selectors.
-
-Window
-
-
-Select a window.
-
-----
-WINDOW_SEL := <window_id> 
-            | (DIR|CYCLE_DIR|biggest|last|focused|older|newer)[.floating|.tiled][.like|.unlike][.manual|.automatic][.urgent][.local][.unfocused]
-----
-
-Primary Selectors
-^^^^^^^^^^^^^^^^^
-
-'DIR'::
-	Selects the window in the given (spacial) direction relative to the active window.
-
-'CYCLE_DIR'::
-	Selects the window in the given (cyclic) direction.
-
-biggest::
-	Selects the biggest window on the current desktop.
-
-last::
-	Selects the previously focused window.
-
-focused::
-	Selects the currently focused window.
-
-older::
-	Selects the window older than the focused window in the history.
-
-newer::
-	Selects the window newer than the focused window in the history.
-
-Modifiers
-^^^^^^^^^
-
-floating::
-	Only consider floating windows.
-
-tiled::
-	Only consider tiled windows.
-
-like::
-	Only consider windows that have the same class as the current window.
-
-unlike::
-	Only consider windows that have a different class than the current window.
-
-manual::
-	Only consider windows in manual splitting mode.
-
-automatic::
-	Only consider windows in automatic splitting mode.
-
-local::
-	Only consider windows of the current desktop.
-
-urgent::
-	Only consider urgent windows.
-
-unfocused::
-	Only consider windows other than the focused window.
-
-Desktop
-
-
-Select a desktop.
-
-----
-DESKTOP_SEL := <desktop_name>
-             | [MONITOR_SEL:]^<n>
-             | (CYCLE_DIR|last|[MONITOR_SEL:]focused|older|newer)[.occupied|.free][.urgent][.local]
-----
-
-Primary Selectors
-^^^^^^^^^^^^^^^^^
-
-<desktop_name>::
-	Selects the desktop with the given name.
-
-^<n>::
-	Selects the nth desktop.
-
-'CYCLE_DIR'::
-	Selects the desktop in the given direction relative to the active desktop.
-
-last::
-	Selects the previously focused desktop.
-
-focused::
-	Selects the currently focused desktop.
-
-older::
-	Selects the desktop older than the focused desktop in the history.
-
-newer::
-	Selects the desktop newer than the focused desktop in the history.
-
-Modifiers
-^^^^^^^^^
-
-occupied::
-	Only consider occupied desktops.
-
-free::
-	Only consider free desktops.
-
-urgent::
-	Only consider urgent desktops.
-
-local::
-	Only consider desktops of the current monitor.
-
-Monitor
-
-
-Select a monitor.
-
-----
-MONITOR_SEL := <monitor_name>
-             | ^<n>
-             | (DIR|CYCLE_DIR|last|primary|focused|older|newer)[.occupied|.free]
-----
-
-Primary Selectors
-^^^^^^^^^^^^^^^^^
-
-<monitor_name>::
-	Selects the monitor with the given name.
-
-^<n>::
-	Selects the nth monitor.
-
-'DIR'::
-	Selects the monitor in the given (spacial) direction relative to the active monitor.
-
-'CYCLE_DIR'::
-	Selects the monitor in the given (cyclic) direction relative to the active monitor.
-
-primary::
-	Selects the primary monitor.
-
-last::
-	Selects the previously focused monitor.
-
-focused::
-	Selects the currently focused monitor.
-
-older::
-	Selects the monitor older than the focused monitor in the history.
-
-newer::
-	Selects the monitor newer than the focused monitor in the history.
-
-Modifiers
-^^^^^^^^^
-
-occupied::
-	Only consider monitors where the focused desktop is occupied.
-
-free::
-	Only consider monitors where the focused desktop is free.
-
-
-Window States
--------------
-
-floating::
-	Is above any tiled window and can be moved/resized freely. Although it doesn't occupy any tiling space, it is still part of the window tree.
-
-pseudo_tiled::
-	Has an unrestricted size while being centered in its tiling space.
-
-fullscreen::
-	Fills its monitor rectangle, is above all the other windows and has no borders.
-
-locked::
-	Ignores the *close* message.
-
-sticky::
-	Stays in the focused desktop of its monitor.
-
-private::
-	Tries to keep the same tiling position/size.
-
-
-Commands
---------
-
-Window
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-window ['WINDOW_SEL'] 'OPTIONS'
-
-Options
-^^^^^^^
-*-f*, *--focus* ['WINDOW_SEL']::
-	Focus the selected or given window.
-
-*-d*, *--to-desktop* 'DESKTOP_SEL'::
-	Send the selected window to the given desktop.
-
-*-m*, *--to-monitor* 'MONITOR_SEL'::
-	Send the selected window to the given monitor.
-
-*-w*, *--to-window* 'WINDOW_SEL'::
-	Transplant the selected window to the given window.
-
-*-s*, *--swap* 'WINDOW_SEL'::
-	Swap the selected window with the given window.
-
-*-p*, *--presel* 'DIR'|cancel::
-	Preselect the splitting area of the selected window (or cancel the preselection).
-
-*-r*, *--ratio* 'RATIO'::
-	Set the splitting ratio of the selected window (0 < 'RATIO' < 1).
-
-*-e*, *--edge* 'DIR' 'RATIO'|±'PIXELS'::
-	Set or change the splitting ratio of the edge located in the given direction in relation to the selected window.
-
-*-R*, *--rotate* 'DIR' '90|270|180'::
-	Rotate the tree holding the edge located in the given direction in relation to the selected window.
-
-*-t*, *--toggle* floating|fullscreen|pseudo_tiled|locked|sticky|private[=on|off]::
-	Set or toggle the given state for the selected window.
-
-*-c*, *--close*::
-	Close the selected window.
-
-*-k*, *--kill*::
-	Kill the selected window.
-
-Desktop
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-desktop ['DESKTOP_SEL'] 'OPTIONS'
-
-Options
-^^^^^^^
-*-f*, *--focus* ['DESKTOP_SEL']::
-	Focus the selected or given desktop.
-
-*-m*, *--to-monitor* 'MONITOR_SEL'::
-	Send the selected desktop to the given monitor.
-
-*-l*, *--layout* 'CYCLE_DIR'|monocle|tiled::
-	Set or cycle the layout of the selected desktop.
-
-*-n*, *--rename* <new_name>::
-	Rename the selected desktop.
-
-*-s*, *--swap* 'DESKTOP_SEL'::
-	Swap the selected desktop with the given desktop.
-
-*-r*, *--remove*::
-	Remove the selected desktop.
-
-*-c*, *--cancel-presel*::
-	Cancel the preselection of all the windows of the selected desktop.
-
-*-F*, *--flip* 'horizontal|vertical'::
-	Flip the tree of the selected desktop.
-
-*-R*, *--rotate* '90|270|180'::
-	Rotate the tree of the selected desktop.
-
-*-E*, *--equalize*::
-	Reset the split ratios of the tree of the selected desktop.
-
-*-B*, *--balance*::
-	Adjust the split ratios of the tree of the selected desktop so that all windows occupy the same area.
-
-*-C*, *--circulate* forward|backward::
-	Circulate the leaves of the tree of the selected desktop.
-
-*-t*, *--toggle* floating[=on|off]::
-	Set or toggle the given state for the selected desktop.
-
-
-Monitor
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-monitor ['MONITOR_SEL'] 'OPTIONS'
-
-Options
-^^^^^^^
-*-f*, *--focus* ['MONITOR_SEL']::
-	Focus the selected or given monitor.
-
-*-a*, *--add-desktops* <name>...::
-	Create desktops with the given names in the selected monitor.
-
-*-r*, *--remove-desktops* <name>...::
-	Remove desktops with the given names.
-
-*-o*, *--reorder-desktops* <name>...::
-	Reorder the desktops of the selected monitor to match the given order.
-
-*-d*, *--reset-desktops* <name>...::
-	Rename, add or remove desktops depending on whether the number of given names is equal, superior or inferior to the number of existing desktops. Incidentally reset the settings of the existing desktops.
-
-*-n*, *--rename* <new_name>::
-	Rename the selected monitor.
-
-*-s*, *--swap* 'MONITOR_SEL'::
-	Swap the selected monitor with the given monitor.
-
-Query
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-query 'OPTIONS'
-
-Options
-^^^^^^^
-*-W*, *--windows*::
-	List matching windows.
-
-*-D*, *--desktops*::
-	List matching desktops.
-
-*-M*, *--monitors*::
-	List matching monitors.
-
-*-T*, *--tree*::
-	Print tree rooted at query.
-
-*-H*, *--history*::
-	Print the history as it relates to the query.
-
-*-S*, *--stack*::
-	Print the window stacking order.
-
-[*-m*,*--monitor* ['MONITOR_SEL']] | [*-d*,*--desktop* ['DESKTOP_SEL']] | [*-w*, *--window* ['WINDOW_SEL']]::
-	Constrain matches to the selected monitor, desktop or window.
-
-Restore
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-restore 'OPTIONS'
-
-Options
-^^^^^^^
-
-*-T*, *--tree* <file_path>::
-	Load the desktop trees from the given file.
-
-*-H*, *--history* <file_path>::
-	Load the focus history from the given file.
-
-*-S*, *--stack* <file_path>::
-	Load the window stacking order from the given file.
-
-Control
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-control 'OPTIONS'
-
-Options
-^^^^^^^
-
-*--adopt-orphans*::
-	Manage all the unmanaged windows remaining from a previous session.
-
-*--toggle-visibility*::
-	Toggle the visibility of all the windows.
-
-*--record-history* on|off::
-	Enable or disable the recording of window focus history.
-
-*--subscribe*::
-	Continuously print status information.
-
-*--get-status*::
-	Print the current status information.
-
-Pointer
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-pointer 'OPTIONS'
-
-Options
-^^^^^^^
-
-*-g*, *--grab* focus|move|resize_side|resize_corner::
-	Initiate the given pointer action.
-
-*-t*, *--track* <x> <y>::
-	Pass the pointer root coordinates for the current pointer action.
-
-*-u*, *--ungrab*::
-	Terminate the current pointer action.
-
-Rule
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-rule 'OPTIONS'
-
-Options
-^^^^^^^
-
-*-a*, *--add* <class_name>|<instance_name>|* [*-o*|*--one-shot*] [monitor=MONITOR_SEL|desktop=DESKTOP_SEL|window=WINDOW_SEL] [(floating|fullscreen|pseudo_tiled|locked|sticky|private|center|follow|manage|focus|border)=(on|off)] [split_dir=DIR] [split_ratio=RATIO]::
-	Create a new rule.
-
-*-r*, *--remove* ^<n>|head|tail|<class_name>|<instance_name>|*...::
-	Remove the given rules.
-
-*-l*, *--list* [<class_name>|<instance_name>|*]::
-	List the rules.
-
-Config
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-config [-m 'MONITOR_SEL'|-d 'DESKTOP_SEL'|-w 'WINDOW_SEL'] <key> [<value>]::
-	Get or set the value of <key>.
-
-Quit
-
-
-General Syntax
-^^^^^^^^^^^^^^
-
-quit [<status>]::
-	Quit with an optional exit status.
-
-Exit Codes
-----------
-
-If the server can't handle a message, *bspc* will return with one of the following exit codes:
-
-1::
-	Failure.
-2::
-	Syntax error.
-3::
-	Unknown command.
-
-
-Settings
---------
-Colors are either '#RRGGBB' or http://en.wikipedia.org/wiki/X11_color_names[X color names], booleans are 'true', 'on', 'false' or 'off'.
-
-All the boolean settings are 'false' by default unless stated otherwise.
-
-Global Settings
-
-
-'focused_border_color'::
-	Color of the border of a focused window of a focused monitor.
-
-'active_border_color'::
-	Color of the border of a focused window of an unfocused monitor.
-
-'normal_border_color'::
-	Color of the border of an unfocused window.
-
-'presel_border_color'::
-	Color of the *presel* message feedback.
-
-'focused_locked_border_color'::
-	Color of the border of a focused locked window of a focused monitor.
-
-'active_locked_border_color'::
-	Color of the border of a focused locked window of an unfocused monitor.
-
-'normal_locked_border_color'::
-	Color of the border of an unfocused locked window.
-
-'focused_sticky_border_color'::
-	Color of the border of a focused sticky window of a focused monitor.
-
-'active_sticky_border_color'::
-	Color of the border of a focused sticky window of an unfocused monitor.
-
-'normal_sticky_border_color'::
-	Color of the border of an unfocused sticky window.
-
-'focused_private_border_color'::
-	Color of the border of a focused private window of a focused monitor.
-
-'active_private_border_color'::
-	Color of the border of a focused private window of an unfocused monitor.
-
-'normal_private_border_color'::
-	Color of the border of an unfocused private window.
-
-'urgent_border_color'::
-	Color of the border of an urgent window.
-
-'split_ratio'::
-	Default split ratio.
-
-'status_prefix'::
-	Prefix prepended to each of the status lines.
-
-'external_rules_command'::
-	External command used to retrieve rule consequences. The command will receive the the ID of the window being processed as its first argument and the class and instance names as second and third arguments. The output of that command must have the following format: *key1=value1 key2=value2 ...* (the valid key/value pairs are given in the description of the 'rule' command).
-
-'initial_polarity'::
-	On which child should a new window be attached when adding a window on a single window tree in automatic mode. Accept the following values: *first_child*, *second_child*.
-
-'history_aware_focus'::
-	Give priority to the focus history when focusing nodes.
-
-'focus_by_distance'::
-	Base focusing on distances between windows.
-
-'borderless_monocle'::
-	Remove borders for tiled windows in monocle mode.
-
-'gapless_monocle'::
-	Remove gaps for tiled windows in monocle mode.
-
-'focus_follows_pointer'::
-	Focus the window under the pointer.
-
-'pointer_follows_focus'::
-	When focusing a window, put the pointer at its center.
-
-'pointer_follows_monitor'::
-	When focusing a monitor, put the pointer at its center.
-
-'auto_alternate'::
-	Interpret two consecutive identical *use* messages as an *alternate* message.
-
-'auto_cancel'::
-	Interpret two consecutive identical *presel* messages as a *cancel* message.
-
-'apply_floating_atom'::
-	Set the value of the '_BSPWM_FLOATING_WINDOW' atom of each window according to its floating state.
-
-'ignore_ewmh_focus'::
-	Ignore EWMH focus requests coming from applications.
-
-'center_pseudo_tiled'::
-	Center pseudo tiled windows into their tiling rectangles. Defaults to 'true'.
-
-'remove_disabled_monitors'::
-	Consider disabled monitors as disconnected.
-
-'remove_unplugged_monitors'::
-	Remove unplugged monitors.
-
-'merge_overlapping_monitors'::
-	Merge overlapping monitors (the bigger remains).
-
-Monitor and Desktop Settings
-
-
-'top_padding'::
-'right_padding'::
-'bottom_padding'::
-'left_padding'::
-	Padding space added at the sides of the monitor or desktop.
-
-Default, Desktop Default and Window Settings
-
-
-'border_width'::
-	Window border width.
-
-Default and Desktop Settings
-
-
-'window_gap'::
-	Size of the gap that separates windows.
-
-
-Status Format
--------------
-
-Status information is composed of items separated by colons.
-
-Each item has the form '<type><value>' where '<type>' is the first character of the item.
-
-'M<monitor_name>'::
-	Focused monitor.
-
-'m<monitor_name>'::
-	Unfocused monitor.
-
-'O<desktop_name>'::
-	Occupied focused desktop.
-
-'o<desktop_name>'::
-	Occupied unfocused desktop.
-
-'F<desktop_name>'::
-	Free focused desktop.
-
-'f<desktop_name>'::
-	Free unfocused desktop.
-
-'U<desktop_name>'::
-	Urgent focused desktop.
-
-'u<desktop_name>'::
-	Urgent unfocused desktop.
-
-'L(T|M)'::
-	Layout of the focused desktop of a monitor.
-
-Environment Variables
----------------------
-
-'BSPWM_SOCKET'::
-	The path of the socket used for the communication between *bspc* and *bspwm*. If it isn't defined, then the following path is used: '/tmp/bspwm<host_name>_<display_number>_<screen_number>-socket'.
-
-Panels
-------
-
-* Any EWMH compliant panel (e.g.: 'tint2', 'bmpanel2', etc.).
-* A custom panel (have a look at the files in 'examples/panel').
-
-Key Features
-------------
-
-* Configured and controlled through messages.
-* Multiple monitors support.
-* EWMH support.
-* Hybrid tiling.
-
-Contributors
-------------
-
-* Steven Allen <steven at stebalien.com>
-* Thomas Adam <thomas at xteddy.org>
-* Ivan Kanakarakis <ivan.kanak at gmail.com>
-
-Author
-------
-
-Bastien Dejean <nihilhill at gmail.com>
-
-Mailing List
-------------
-
-bspwm at librelist.com
-
-////
-vim: set ft=asciidoc:
-////

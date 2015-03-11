@@ -16,7 +16,6 @@ class MarkdownScrlSync
       {$}          = require 'space-pen'
       SubAtom      = require 'sub-atom'
       @subs        = new SubAtom
-
       
       if not (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview')
         console.log 'markdown-scroll-sync: markdown-preview package not found'
@@ -29,7 +28,8 @@ class MarkdownScrlSync
            editor.getGrammar().name is 'GitHub Markdown'
           @stopTracking()
           for preview in atom.workspace.getPaneItems() 
-            if preview.editor is editor
+            if preview instanceof MarkdownPreviewView and 
+               preview.editor is editor
               @startTracking editor, preview
               break
           null
@@ -39,15 +39,25 @@ class MarkdownScrlSync
     if not (shadow = editorView.shadowRoot) then return
     $lines = $ shadow.querySelector '.lines'
     
-    lastTopRow = null
+    lastTopRow = lastBotRow = null
+    
     @scrollInterval = setInterval =>
       topRow = Math.min()
+      botRow = Math.max()
       $lines.find('.line').each (idx, ele) =>
         row = $(ele).attr 'data-screen-row'
         topRow = Math.min topRow, row
+        botRow = Math.max botRow, row
       topRow += 1
-      if topRow isnt lastTopRow
-        lastTopRow = topRow
+      
+      endPos = editor.screenPositionForBufferPosition(editor.getBuffer().getEndPosition()).row
+
+      if botRow isnt lastBotRow and 
+         botRow >= endPos - 1
+        preview.scrollToBottom()
+        # console.log 'bottom', botRow, endPos
+      
+      else if topRow isnt lastTopRow
         # console.log 'topRow', topRow
         try
           bufPos = editor.bufferPositionForScreenPosition [topRow+1, 0]
@@ -59,6 +69,9 @@ class MarkdownScrlSync
         @scroll preview, mdBeforeTopLine
         
         # fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\mdBeforeTopLine.md', mdBeforeTopLine
+        
+      lastTopRow = topRow
+      lastBotRow = botRow
     , 300
 
   walkDOM: (node) ->

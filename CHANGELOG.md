@@ -1,4 +1,7 @@
 
+### 0.3.0 - 3/11/15
+* force scroll preview to bottom when source at bottom
+
 ### 0.2.1 - 3/10/15
 * removed debug statements
 
