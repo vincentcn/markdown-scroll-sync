@@ -128,7 +128,7 @@ For obvious reasons, neither desktop nor monitor names may be valid descriptive
 selectors.
 
 Window
-~~~~~~
+
 
 Select a window.
 
@@ -192,7 +192,7 @@ unfocused::
 	Only consider windows other than the focused window.
 
 Desktop
-~~~~~~~
+
 
 Select a desktop.
 
@@ -242,7 +242,7 @@ local::
 	Only consider desktops of the current monitor.
 
 Monitor
-~~~~~~~
+
 
 Select a monitor.
 
@@ -318,7 +318,7 @@ Commands
 --------
 
 Window
-~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -364,7 +364,7 @@ Options
 	Kill the selected window.
 
 Desktop
-~~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -414,7 +414,7 @@ Options
 
 
 Monitor
-~~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -445,7 +445,7 @@ Options
 	Swap the selected monitor with the given monitor.
 
 Query
-~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -476,7 +476,7 @@ Options
 	Constrain matches to the selected monitor, desktop or window.
 
 Restore
-~~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -496,7 +496,7 @@ Options
 	Load the window stacking order from the given file.
 
 Control
-~~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -522,7 +522,7 @@ Options
 	Print the current status information.
 
 Pointer
-~~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -542,7 +542,7 @@ Options
 	Terminate the current pointer action.
 
 Rule
-~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -562,7 +562,7 @@ Options
 	List the rules.
 
 Config
-~~~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -571,7 +571,7 @@ config [-m 'MONITOR_SEL'|-d 'DESKTOP_SEL'|-w 'WINDOW_SEL'] <key> [<value>]::
 	Get or set the value of <key>.
 
 Quit
-~~~~
+
 
 General Syntax
 ^^^^^^^^^^^^^^
@@ -599,7 +599,7 @@ Colors are either '#RRGGBB' or http://en.wikipedia.org/wiki/X11_color_names[X co
 All the boolean settings are 'false' by default unless stated otherwise.
 
 Global Settings
-~~~~~~~~~~~~~~~
+
 
 'focused_border_color'::
 	Color of the border of a focused window of a focused monitor.
@@ -701,7 +701,7 @@ Global Settings
 	Merge overlapping monitors (the bigger remains).
 
 Monitor and Desktop Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 'top_padding'::
 'right_padding'::
@@ -710,13 +710,13 @@ Monitor and Desktop Settings
 	Padding space added at the sides of the monitor or desktop.
 
 Default, Desktop Default and Window Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 'border_width'::
 	Window border width.
 
 Default and Desktop Settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 'window_gap'::
 	Size of the gap that separates windows.

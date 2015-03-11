@@ -1,4 +1,7 @@
 
+### 0.2.1 - 3/10/15
+* removed debug statements
+
 ### 0.2.0 - 3/10/15
 * improved accuracy by walking the DOM
 

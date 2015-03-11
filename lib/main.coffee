@@ -58,7 +58,7 @@ class MarkdownScrlSync
         mdBeforeTopLine = editor.getTextInBufferRange [[0,0], bufPos]
         @scroll preview, mdBeforeTopLine
         
-        fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\mdBeforeTopLine.md', mdBeforeTopLine
+        # fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\mdBeforeTopLine.md', mdBeforeTopLine
     , 300
 
   walkDOM: (node) ->
@@ -77,7 +77,7 @@ class MarkdownScrlSync
       
   scroll: (preview, text) ->
     @roaster text, {}, (err, html) =>
-      fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\htmlBeforeTopLine.html', html
+      # fs.writeFileSync 'C:\\atom\\markdown-scroll-sync\\htmlBeforeTopLine.html', html
       
       @numEles = 0
       regex = new RegExp '<([^\\/][a-z]*).*?>', 'g'
