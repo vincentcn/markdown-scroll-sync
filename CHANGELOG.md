@@ -1,4 +1,7 @@
 
+### 0.3.1 - 3/12/15
+* fixed exception when closing MD source tab
+
 ### 0.3.0 - 3/11/15
 * force scroll preview to bottom when source at bottom
 

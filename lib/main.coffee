@@ -25,6 +25,7 @@ class MarkdownScrlSync
       
       @subs.add atom.workspace.observeActivePaneItem (editor) =>
         if editor instanceof TextEditor and 
+           not editor.isDestroyed       and
            editor.getGrammar().name is 'GitHub Markdown'
           @stopTracking()
           for preview in atom.workspace.getPaneItems() 
