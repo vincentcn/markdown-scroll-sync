@@ -1,4 +1,8 @@
 
+### 0.3.2 - 3/12/15
+* preview didn't scroll to top
+* preview scrolling didn't work at all!
+
 ### 0.3.1 - 3/12/15
 * fixed exception when closing MD source tab
 

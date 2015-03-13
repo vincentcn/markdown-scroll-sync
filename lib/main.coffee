@@ -25,7 +25,7 @@ class MarkdownScrlSync
       
       @subs.add atom.workspace.observeActivePaneItem (editor) =>
         if editor instanceof TextEditor and 
-           not editor.isDestroyed       and
+           editor.alive                 and
            editor.getGrammar().name is 'GitHub Markdown'
           @stopTracking()
           for preview in atom.workspace.getPaneItems() 
@@ -43,13 +43,16 @@ class MarkdownScrlSync
     lastTopRow = lastBotRow = null
     
     @scrollInterval = setInterval =>
+      if not editor.alive
+        @stopTracking()
+        return
+        
       topRow = Math.min()
       botRow = Math.max()
       $lines.find('.line').each (idx, ele) =>
         row = $(ele).attr 'data-screen-row'
         topRow = Math.min topRow, row
         botRow = Math.max botRow, row
-      topRow += 1
       
       endPos = editor.screenPositionForBufferPosition(editor.getBuffer().getEndPosition()).row
 
