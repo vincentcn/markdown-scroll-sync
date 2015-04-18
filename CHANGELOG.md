@@ -1,4 +1,7 @@
 
+### 0.3.3 - 4/18/15
+* fixed roaster dependency version
+
 ### 0.3.2 - 3/12/15
 * preview didn't scroll to top
 * preview scrolling didn't work at all!
