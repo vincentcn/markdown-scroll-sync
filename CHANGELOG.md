@@ -1,4 +1,7 @@
 
+### 0.3.4 - 5/18/15
+* fixed dom walk bug
+
 ### 0.3.3 - 4/18/15
 * fixed roaster dependency version
 

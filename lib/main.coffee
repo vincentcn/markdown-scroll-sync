@@ -103,10 +103,10 @@ class MarkdownScrlSync
           @numEles++
       
       # console.log 'before walkDOM', @numEles
-      @resultNode = preview[0]
-      @walkDOM @resultNode
-      @resultNode.scrollIntoView()
-      # console.log 'walkDOM done', @resultNode
+      if (@resultNode = preview[0])
+        @walkDOM @resultNode
+        @resultNode.scrollIntoView()
+        # console.log 'walkDOM done', @resultNode
 
   stopTracking: ->
     if @scrollInterval 
