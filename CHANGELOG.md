@@ -1,4 +1,7 @@
 
+### 0.4.0 - 6/4/15
+* supports lit CS, thanks @michaelforrest
+
 ### 0.3.4 - 5/18/15
 * fixed dom walk bug
 
