@@ -24,9 +24,15 @@ class MarkdownScrlSync
       MarkdownPreviewView  = require viewPath
       
       @subs.add atom.workspace.observeActivePaneItem (editor) =>
-        if editor instanceof TextEditor and 
+
+        isMarkdown = (editor)->
+          for name in ["GitHub Markdown", "CoffeeScript (Literate)"]
+            return true if editor.getGrammar().name is name
+          return false
+
+        if editor instanceof TextEditor and
            editor.alive                 and
-           editor.getGrammar().name is 'GitHub Markdown'
+           isMarkdown(editor)
           @stopTracking()
           for preview in atom.workspace.getPaneItems() 
             if preview instanceof MarkdownPreviewView and 
