@@ -55,7 +55,7 @@ class MarkdownScrlSync
         
       topRow = Math.min()
       botRow = Math.max()
-      $lines.find('.line').each (idx, ele) =>
+      $lines.find('.line[data-screen-row]').each (idx, ele) =>
         row = $(ele).attr 'data-screen-row'
         topRow = Math.min topRow, row
         botRow = Math.max botRow, row
