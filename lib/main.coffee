@@ -17,10 +17,10 @@ class MarkdownScrlSync
       SubAtom      = require 'sub-atom'
       @subs        = new SubAtom
 
-      if not (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview') or
-          (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview-plus')
-        console.log 'markdown-scroll-sync: markdown preview packages not found'
-        return
+      if not (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview')
+        if not  (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview-plus')
+          console.log 'markdown-scroll-sync: markdown preview packages not found'
+          return
 
       viewPath = pathUtil.join prvwPkg.path, 'lib/markdown-preview-view'
       MarkdownPreviewView  = require viewPath
