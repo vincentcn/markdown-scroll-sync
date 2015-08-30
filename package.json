@@ -1,7 +1,7 @@
 {
   "name": "markdown-scroll-sync",
   "main": "./lib/main",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Auto-scroll markdown-preview tab to match markdown source",
   "repository": "https://github.com/mark-hahn/markdown-scroll-sync",
   "license": "MIT",
@@ -11,6 +11,6 @@
   "dependencies": {
     "space-pen": "*",
     "sub-atom":  "*",
-    "roaster": "^1.1.1"
+    "roaster": "^1.1.2"
   }
 }
