@@ -1,4 +1,8 @@
 
+### 2.0.1 - 11/20/15
+
+Removed cruft from readme.
+
 ### 2.0.0 - 11/20/15
 
 Rewritten from scratch.

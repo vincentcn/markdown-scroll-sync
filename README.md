@@ -13,8 +13,6 @@ This is a total rewrite of the package. This version is more accurate and smooth
 
 ### Installation
 
-Hello world.
-
 Run `apm install markdown-scroll-sync` or use the settings page to find the package and install it.
 
 ### Usage
