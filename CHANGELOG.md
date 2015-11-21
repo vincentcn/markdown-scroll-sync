@@ -1,4 +1,8 @@
 
+### 2.0.0 - 11/20/15
+
+Rewritten from scratch.
+
 ### 0.4.0 - 6/4/15
 * supports lit CS, thanks @michaelforrest
 
