@@ -1,4 +1,8 @@
 
+### 2.0.3 - 11/21/15
+
+Went back to 2.0.1 code.
+
 ### 2.0.2 - 11/21/15
 
 Speeded up everything but editing.
