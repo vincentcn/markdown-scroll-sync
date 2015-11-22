@@ -17,14 +17,16 @@ module.exports =
 
     if eventType isnt 'changed'
       @getVisTopHgtBot()
-      if @scrnTopOfs    isnt @lastScrnTopOfs or
-         @scrnBotOfs    isnt @lastScrnBotOfs or
-         @previewTopOfs isnt @lastPvwTopOfs  or
-         @previewBotOfs isnt @lastPvwBotOfs
-        @lastScrnTopOfs = @scrnTopOfs
-        @lastScrnBotOfs = @scrnBotOfs
-        @lastPvwTopOfs  = @previewTopOfs
-        @lastPvwBotOfs  = @previewBotOfs
+      {width:scrnW, height:scrnH} = @editorView.getBoundingClientRect()
+      {width:pvwW, height:pvwH}   = @previewEle.getBoundingClientRect()
+      if scrnW isnt @lastScrnW or
+         scrnH isnt @lastScrnH or
+         pvwW  isnt @lastPvwW  or
+         pvwH  isnt @lastPvwH
+        @lastScrnW = scrnW    
+        @lastScrnH = scrnH
+        @lastPvwW  = pvwW 
+        @lastPvwH  = pvwH 
         @setMap no
     
     switch eventType
