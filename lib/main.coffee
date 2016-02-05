@@ -26,7 +26,8 @@ class MarkdownScrlSync
       isMarkdown = (editor)->
         for name in ["GitHub Markdown", "CoffeeScript (Literate)"]
           return true if editor.getGrammar().name is name
-        return false
+        [fpath, ..., fext] = editor.getPath().split('.')
+        return fext == 'md'
       if editor instanceof TextEditor and
          editor.alive                 and
          isMarkdown(editor)
