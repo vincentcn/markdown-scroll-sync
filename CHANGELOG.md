@@ -1,4 +1,8 @@
 
+### 2.1.0 - 1/5/16
+
+Now works on any file with an MD extension (thanks OJFord)
+
 ### 2.0.3 - 11/21/15
 
 Went back to 2.0.1 code.
