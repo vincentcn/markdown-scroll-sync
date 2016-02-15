@@ -1,7 +1,7 @@
 {
   "name": "markdown-scroll-sync",
   "main": "./lib/main",
-  "version": "1.2.1",
+  "version": "2.1.2",
   "description": "Auto-scroll markdown-preview tab to match markdown source",
   "repository": "https://github.com/mark-hahn/markdown-scroll-sync",
   "license": "MIT",

@@ -1,4 +1,8 @@
 
+### 2.1.2 - 2/15/16
+
+fixed unchecked getpath
+
 ### 2.1.1 - 1/5/16
 
 Duplicate due to APM problem

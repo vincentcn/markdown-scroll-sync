@@ -25,9 +25,11 @@ class MarkdownScrlSync
     @subs.add atom.workspace.observeActivePaneItem (editor) =>
       isMarkdown = (editor)->
         for name in ["GitHub Markdown", "CoffeeScript (Literate)"]
-          return true if editor.getGrammar().name is name
-        [fpath, ..., fext] = editor.getPath().split('.')
-        return fext == 'md'
+          return true if editor.getGrammar()?.name is name
+        if(path = editor.getPath())
+          [fpath, ..., fext] = path.split('.')
+          return true if fext.toLowerCase() is 'md'
+        false
       if editor instanceof TextEditor and
          editor.alive                 and
          isMarkdown(editor)
