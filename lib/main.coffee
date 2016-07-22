@@ -2,16 +2,16 @@
   lib/main.coffee
 ###
 
-log = (args...) -> 
+log = (args...) ->
   console.log.apply console, ['markdown-scroll, main:'].concat args
 
 SubAtom  = require 'sub-atom'
 
 class MarkdownScrlSync
-  
+
   activate: (state) ->
     pathUtil     = require 'path'
-    {TextEditor} = require 'atom'
+    {TextEditor} = atom.workspace.buildTextEditor()
     @subs        = new SubAtom
 
     if not (prvwPkg = atom.packages.getLoadedPackage 'markdown-preview') and
@@ -21,7 +21,7 @@ class MarkdownScrlSync
 
     viewPath = pathUtil.join prvwPkg.path, 'lib/markdown-preview-view'
     MarkdownPreviewView  = require viewPath
-    
+
     @subs.add atom.workspace.observeActivePaneItem (editor) =>
       isMarkdown = (editor)->
         for name in ["GitHub Markdown", "CoffeeScript (Literate)"]
@@ -30,12 +30,12 @@ class MarkdownScrlSync
           [fpath, ..., fext] = path.split('.')
           return true if fext.toLowerCase() is 'md'
         false
-      if editor instanceof TextEditor and
-         editor.alive                 and
+      if atom.workspace.isTextEditor(editor) and
+         editor.alive                        and
          isMarkdown(editor)
         @stopTracking()
-        for previewView in atom.workspace.getPaneItems() 
-          if previewView instanceof MarkdownPreviewView and 
+        for previewView in atom.workspace.getPaneItems()
+          if previewView instanceof MarkdownPreviewView and
              previewView.editor is editor
             @startTracking editor, previewView
             break
@@ -44,25 +44,25 @@ class MarkdownScrlSync
   startTracking: (@editor, previewView) ->
     @editorView    = atom.views.getView @editor
     @previewEle    = previewView.element
-    
+
     @chrHgt = @editor.getLineHeightInPixels()
     @lastScrnRow = null
     @lastChrOfs  = 0
-    
+
     @setMap()
     @chkScroll 'init'
-    
+
     @subs2 = new SubAtom
     @subs2.add @editor    .onDidStopChanging         => @setMap(); @chkScroll 'changed'
     @subs2.add @editor    .onDidChangeCursorPosition => @chkScroll 'cursorMoved'
     @subs2.add @editorView.onDidChangeScrollTop      => @chkScroll 'newtop'
     @subs2.add @editor    .onDidDestroy              => @stopTracking()
-    
+
   stopTracking: ->
     @subs2.dispose() if @subs2
     @subs2 = null
-      
-  deactivate: -> 
+
+  deactivate: ->
     @stopTracking()
     @subs.dispose()
 
