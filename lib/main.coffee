@@ -28,7 +28,7 @@ class MarkdownScrlSync
           return true if editor.getGrammar()?.name is name
         if(path = editor.getPath())
           [fpath, ..., fext] = path.split('.')
-          return true if fext.toLowerCase() is 'md'
+          return true if fext.toLowerCase() in ['md', 'markdown', 'rmd']
         false
       if editor instanceof TextEditor and
          editor.alive                 and
