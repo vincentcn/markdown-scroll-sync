@@ -9,7 +9,11 @@ module.exports =
 
   getVisTopHgtBot: ->
     {top: @edtTopBnd, bottom: edtBotBnd} = @editorView.getBoundingClientRect()
-    lineEles = @editorView.shadowRoot.querySelectorAll '.lines .line[data-screen-row]'
+	 # Fix for issue #64, March 4, 2017
+	 # Implemented by Michael Fierro (biffster@gmail.com)
+	 # Super-simple fix, just remove ".shadowRoot" from the line below.
+    # lineEles = @editorView.shadowRoot.querySelectorAll '.lines .line[data-screen-row]'
+    lineEles = @editorView.querySelectorAll '.lines .line[data-screen-row]'
     lines = []
     for lineEle in lineEles
       {top: lineTopBnd} = lineEle.getBoundingClientRect()
